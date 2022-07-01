@@ -1,0 +1,19 @@
+"UnlitGeneric"
+{
+	"$baseTexture" 									"vgui\replay\thumbnails\BUTTONS\ITEMS_HOVER"
+	"$vertexcolor"									"1"
+   	"$nolod" 										"1"
+	"$translucent" 									"1"
+	"%keywords" "tf"
+
+
+	"Proxies"
+	{
+		"AnimatedTexture"
+		{
+			"animatedtexturevar" 					"$basetexture"
+			"animatedtextureframenumvar" 			"$frame"
+			"animatedtextureframerate" 				"30"
+		}
+	}
+}

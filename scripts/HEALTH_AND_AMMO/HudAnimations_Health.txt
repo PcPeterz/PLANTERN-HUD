@@ -1,0 +1,286 @@
+
+//Health Bonus Pulse
+event HudHealthBonusPulse
+{
+	Animate	PlayerStatusHealthBonusImage 	Alpha		"255"		Linear 0.0 0.2
+	Animate	PlayerStatusHealthBonusImage 	Alpha		"0"			Linear 0.2 0.4
+	
+	Animate "OVERHEALHPGIF"   Alpha    "175"	   Linear 0.0 0.0
+	Animate "OVERHEALHPGIF"   Alpha    "125"	   Linear 0.0 0.0
+
+	Animate "NORMALHP"         Alpha     "0"      Linear 0.0 0.0
+	Animate "NORMALHP"         Alpha     "0"      Linear 0.0 0.0
+
+	Animate "LOWHPGIF"         Alpha     "0"      Linear 0.0 0.0
+	Animate "LOWHPGIF"         Alpha     "0"      Linear 0.0 0.0
+	Animate "LOWHPGIF"         Alpha     "0"      Linear 0.0 0.0
+	Animate "LOWHPGIF"         Alpha     "0"      Linear 0.0 0.0
+
+	RunEvent HudHealthBonusPulseLoop	0.0
+	
+ 	SetVisible OVERHEALHPGIF   1   0
+
+	SetVisible LOWHPGIF        0 0
+	SetVisible LOWHPGIF        0 0
+	SetVisible LOWHPGIF        0 0
+	SetVisible LOWHPGIF        0 0	
+}
+
+event HudHealthBonusPulseLoop
+{
+	RunEvent HudHealthBonusPulse 0.0
+}
+
+event HudHealthBonusPulseStop
+{
+	RunEvent HudHealthBonusPulseReset  0.0
+	RunEvent TeamStatus_PlayerAlive    0.0
+	
+	StopEvent HudHealthBonusPulse     0.0
+	StopEvent HudHealthBonusPulseLoop 0.0
+	StopEvent TeamStatus_PlayerDead   0.0
+	StopEvent PlayerStatus_RuneKnockoutPulse 0.0
+    StopEvent PlayerStatus_RuneKnockoutPulse 0.0
+	
+	Animate "NORMALHP"         Alpha    "175"     Linear 0.0 0.0
+	Animate "NORMALHP"         Alpha    "125"     Linear 0.0 0.0
+
+	Animate "OVERHEALHPGIF"    Alpha     "0"      Linear 0.0 0.0
+	Animate "OVERHEALHPGIF"    Alpha     "0"      Linear 0.0 0.0
+	
+	Animate "LOWHPGIF"         Alpha     "0"      Linear 0.0 0.0
+	Animate "LOWHPGIF"         Alpha     "0"      Linear 0.0 0.0
+	
+    StopAnimation        "LOWHPGIF"        Alpha "0.1"
+	StopPanelAnimations  "LOWHPGIF"        1.0
+	StopAnimation        "OVERHEALHPGIF"   Alpha "0.1"
+	StopPanelAnimations  "OVERHEALHPGIF"   1.0
+	
+	SetVisible NORMALHP        1   0
+ 	SetVisible OVERHEALHPGIF   0   0
+
+
+}
+event HudHealthBonusPulseReset 
+{
+	Animate "NORMALHP"         Alpha     "175"      Linear 0.0 0.0
+    Animate "NORMALHP"         Alpha     "175"      Linear 0.0 0.0
+    Animate  PlayerStatus_RuneKnockoutPulse  Alpha     "0"      Linear 0.0 0.0
+	Animate  PlayerStatus_RuneKnockoutPulse  Alpha     "0"      Linear 0.0 0.0
+	
+	RunEvent  HudHealthBonusPulseReset 0.0
+	RunEvent TeamStatus_PlayerAlive    0.0
+    RunEvent TeamStatus_PlayerAlive    0.0
+	
+	StopEvent TeamStatus_PlayerDead    0.0
+	StopEvent PlayerStatus_RuneKnockoutPulse 0.0
+    StopEvent PlayerStatus_RuneKnockoutPulse 0.0
+	
+
+    StopAnimation        "LOWHPGIF"        Alpha  0.1
+	StopPanelAnimations  "LOWHPGIF"        1.0
+	StopAnimation        "OVERHEALHPGIF"   Alpha  0.1
+	StopPanelAnimations  "OVERHEALHPGIF"   1.0
+
+	Animate "LOWHPGIF"         Alpha     "0"      Linear 0.0 0.0
+	Animate "LOWHPGIF"         Alpha     "0"      Linear 0.0 0.0
+	Animate "LOWHPGIF"         Alpha     "0"      Linear 0.0 0.0
+	Animate "LOWHPGIF"         Alpha     "0"      Linear 0.0 0.0
+	
+	SetVisible LOWHPGIF        0 0
+	SetVisible LOWHPGIF        0 0
+	SetVisible LOWHPGIF        0 0
+	SetVisible LOWHPGIF        0 0
+}
+//===============================================================================================================================
+
+//Health Dying Pulse
+
+event HudHealthDyingPulse
+{
+	Animate	PlayerStatusHealthBonusImage 	Alpha		"255"		Linear 0.0 0.075
+	Animate	PlayerStatusHealthBonusImage 	Alpha		"0"			Linear 0.125 0.075
+	
+    Animate "LOWHPGIF"        Alpha   "175"       Linear 0.0 0.0
+    Animate "LOWHPGIF"        Alpha   "125"       Linear 0.0 0.0
+	
+	Animate "NORMALHP"         Alpha     "0"      Linear 0.0 0.0
+	Animate "NORMALHP"         Alpha     "0"      Linear 0.0 0.0
+	
+	RunEvent HudHealthDyingPulseLoop	0.0
+	
+	SetVisible LOWHPGIF        1   0
+}
+
+// call to loop HudHealthDyingPulse
+event HudHealthDyingPulseLoop
+{
+	RunEvent HudHealthDyingPulse 0.0
+}
+
+event HudHealthDyingPulseStop
+{
+    Animate "NORMALHP"                                 Alpha    "175"        Spline 0.0 0.0
+	Animate "NORMALHP"                                 Alpha    "125"        Spline 0.0 0.0
+	
+	Animate "LOWHPGIF"         Alpha     "0"      Linear 0.0 0.0
+	Animate "LOWHPGIF"         Alpha     "0"      Linear 0.0 0.0
+
+	StopEvent PlayerStatus_RuneKnockoutPulse 0.0
+    StopEvent PlayerStatus_RuneKnockoutPulse 0.0
+	StopEvent HudHealthDyingPulse     0.0
+	StopEvent HudHealthDyingPulseLoop 0.0
+	RunEvent HudHealthBonusPulseReset 0.0
+
+	SetVisible NORMALHP        1 0
+	SetVisible LOWHPGIF        0 0
+
+	SetVisible LOWHPGIF        0 0
+	SetVisible LOWHPGIF        0 0
+	SetVisible LOWHPGIF        0 0
+	SetVisible LOWHPGIF        0 0
+}
+//===============================================================================================================================
+
+// Show the Overtime panel
+event OvertimeShow
+{
+	Animate OvertimeLabel				        Alpha	"255"		   Linear 0.0 0.1	
+	Animate OvertimeBG					        Alpha	"255"		   Linear 0.0 0.1
+    Animate "LOWHPGIF"                          Alpha     "0"          Linear 0.0 0.1
+	Animate "OVERHEALHPGIF"                     Alpha     "0"          Linear 0.0 0.1
+}
+
+event HudSnapShotReminderIn
+{
+	Animate ScreenshotPanel		Position	"c-83 -50"	Linear 0.0 0.001
+	Animate ScreenshotPanel		Position	"c-83 13"	Spline 0.001 0.2
+	Animate "LOWHPGIF"          Alpha       "0"         Linear 0.0 0.001
+	Animate "OVERHEALHPGIF"     Alpha       "0"         Linear 0.0 0.001
+}
+
+event HudReplayReminderIn	// Places the replay reminder in the same place as the snapshot reminder
+{
+	Animate ReplayReminder		Position	"c-83 -50"	Linear 0.0 0.001
+	Animate ReplayReminder		Position	"c-83 13"	Spline 0.001 0.2
+	Animate "LOWHPGIF"          Alpha       "0"         Linear 0.0 0.001
+	Animate "OVERHEALHPGIF"     Alpha       "0"         Linear 0.0 0.001
+}
+
+event HudReplayReminderIn2	// Puts the panel below the snapshot panel
+{
+	Animate ReplayReminder		Position	"c-83 -50"	Linear 0.0 0.001
+	Animate ReplayReminder		Position	"c-83 53"	Spline 0.001 0.2
+	Animate "LOWHPGIF"          Alpha       "0"         Linear 0.0 0.001
+	Animate "OVERHEALHPGIF"     Alpha       "0"         Linear 0.0 0.001	
+}
+//============================================================================================================================================================================
+
+event TeamStatus_PlayerDead
+{
+	SetVisible DeathPanel  1 0
+	SetVisible SkullPanel  1 0
+	SetVisible respawntime 1 0
+	SetVisible NORMALHP    1 0
+    SetVisible LOWHPGIF    0 0.2
+	
+	Animate DeathPanel ypos 19 Accel 0 0.2
+	Animate SkullPanel ypos 20 Accel 0 0.2
+	Animate respawntime ypos 21 Accel 0 0.2
+}
+event TeamStatus_PlayerAlive
+{
+	Animate DeathPanel ypos 0 Accel 0 0.2
+	Animate SkullPanel ypos 0 Accel 0 0.2        
+	SetVisible DeathPanel  0 0.2
+	SetVisible SkullPanel  0 0.2
+	SetVisible respawntime 0 0.2
+	SetVisible NORMALHP    1 0
+	
+	StopEvent TeamStatus_PlayerDead  0.0
+}
+//============================================================================================================================================================================
+event HealthProgressBar_NotSelected
+{
+	Animate HealthProgressBar	Alpha 50 Deaccel 0 0.2   
+}
+
+event HealthProgressBar_Selected
+{
+
+}
+//============================================================================================================================================================================
+event HudReadyPulse
+{
+	Animate	TournamentInstructionsLabel 	FgColor		"TanLight"		Linear 0.0 0.1
+	Animate	TournamentInstructionsLabel 	FgColor		"RedSolid"		Linear 0.3 0.4
+	
+
+	RunEvent HudReadyPulseLoop	0.5 	
+}
+
+event HudReadyPulseLoop
+{
+	RunEvent HudReadyPulse			0.0 
+}
+
+event HudReadyPulseEnd
+{
+	Animate	TournamentInstructionsLabel 	FgColor		"TanLight"		Linear 0.0 0.1
+	
+	StopEvent HudReadyPulse			0.0
+	StopEvent HudReadyPulseLoop		0.0  
+
+}
+
+//============================================================================================================================================================================
+
+// Flash the medic charge hud when we have full charge
+
+event HudMedicCharged
+{
+	Animate	ChargeLabel 	FgColor		"TanLight"		Linear 0.0 0.1
+	Animate	ChargeLabel 	FgColor		"TanDarker"		Linear 0.3 0.4
+	
+	Animate	ChargeMeter 	FgColor		"TanLight"		Linear 0.0 0.1
+	Animate	ChargeMeter 	FgColor		"TanDarker"		Linear 0.3 0.4
+
+	RunEvent HudMedicChargedLoop	0.6
+}
+
+// call to loop HudHealthBonusPulse
+event HudMedicChargedLoop
+{
+	RunEvent HudMedicCharged 0.0  
+}
+
+event HudMedicChargedStop
+{
+	StopEvent HudMedicCharged 0.0
+	StopEvent HudMedicChargedLoop 0.0
+	
+	Animate	ChargeLabel 	FgColor		"TanLight"		Linear 0.0 0.0001
+	Animate	ChargeMeter 	FgColor		"TanLight"		Linear 0.0 0.0001
+}
+
+//===============================================================================================================================
+event PlayerStatus_RuneKnockoutPulse
+{
+  StopEvent PlayerStatus_RuneKnockoutPulse 0.0
+  StopEvent PlayerStatus_RuneKnockoutPulse 0.0
+   
+    Animate  PlayerStatus_RuneKnockoutPulse  Alpha     "0"      Linear 0.0 0.0
+	Animate  PlayerStatus_RuneKnockoutPulse  Alpha     "0"      Linear 0.0 0.0
+	
+  	Animate "LOWHPGIF"         Alpha     "0"      Linear 0.0 0.0
+	Animate "LOWHPGIF"         Alpha     "0"      Linear 0.0 0.0
+	Animate "LOWHPGIF"         Alpha     "0"      Linear 0.0 0.0
+	Animate "LOWHPGIF"         Alpha     "0"      Linear 0.0 0.0
+	
+	SetVisible NORMALHP        1   0
+	
+	SetVisible LOWHPGIF        0 0
+	SetVisible LOWHPGIF        0 0
+	SetVisible LOWHPGIF        0 0
+	SetVisible LOWHPGIF        0 0
+}
